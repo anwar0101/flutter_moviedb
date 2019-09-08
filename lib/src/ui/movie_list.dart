@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/item_model.dart';
 import '../blocs/movies_bloc.dart';
+import '../models/item_model.dart';
 
 class MovieList extends StatelessWidget {
   @override
@@ -30,9 +30,15 @@ class MovieList extends StatelessWidget {
         gridDelegate:
             new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
-          return Image.network(
-            'https://image.tmdb.org/t/p/w185${snapshot.data.results[index].poster_path}',
-            fit: BoxFit.cover,
+          return GestureDetector(
+            child: Image.network(
+              'https://image.tmdb.org/t/p/w185${snapshot.data.results[index].poster_path}',
+              fit: BoxFit.cover,
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, "/details",
+                  arguments: snapshot.data.results[index]);
+            },
           );
         });
   }

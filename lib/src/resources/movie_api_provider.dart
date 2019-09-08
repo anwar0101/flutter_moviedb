@@ -14,6 +14,7 @@ class MovieApiProvider {
     print(response.body.toString());
     if (response.statusCode == 200) {
       // If the call to the server was successful, parse the JSON
+      print(response.body);
       return ItemModel.fromJson(json.decode(response.body));
     } else {
       // If that call was not successful, throw an error.
